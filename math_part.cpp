@@ -14,10 +14,13 @@
 #include <math.h>
 
 #define PI 3
+using namespace std;
+
 
 void dividingQuestion();
 void areaQuestion();
 void exponentQuestion();
+void foilQuestion();
 
 char generateAnswerDouble(double, bool);
 char generateAnswerInt(int,bool);
@@ -25,30 +28,21 @@ char validateQuestion();
 void checkAnswers(char, char);
 
 int randomInt(int, int);
+vector<int> foilEval(int,int,int,int);//a,b,c,d passed ex.(a+b)(c+d)
 
-using namespace std;
 
 
 int main()
 {
     srand(time(NULL));
-//    int randNum, randNum2, randNum3;
-//    for (int i=0;i<5;i++){
-//        
-//    randNum=randomInt(2, 5);
-//    cout<<"randNum: "<<randNum<<endl;
-//    randNum2=randomInt(6, 10);
-//    cout<<"randNum2: "<<randNum2<<endl;
-//    randNum3=randomInt(0, 3);
-//    cout<<"randNum3: " <<randNum3<<endl;
-//    }
     
     dividingQuestion();
     cout<<endl;
     areaQuestion();
     cout<<endl;
     exponentQuestion();
-    return 0;
+    cout<<endl;
+        return 0;
 }
 char generateAnswerDouble(double answer, bool far)
 {
@@ -242,6 +236,7 @@ void areaQuestion()
 }
 void exponentQuestion()
 {
+    srand(time(NULL));
     int selection=randomInt(0, 3);
     int baseNum1=randomInt(2, 5),
             baseNum2=randomInt(3, 6),
@@ -281,6 +276,46 @@ void exponentQuestion()
             break;
             
     }
+}
+
+void foilQuestion()
+{
+    srand(time(NULL));
+
+    int a=1, b=randomInt(1, 9),c=1,d=randomInt(1, 9);
+    //int selection=randomInt(0, 3);
+    vector<int> foilResult={};
+    int selection=0;
+    switch(selection)
+    {
+        case 0://(a+b)(c+d)
+            foilResult=foilEval(a, b, c, d);
+            cout<<"(x+"<<b<<")(x+"<<d<<") :"<<endl;
+            break;
+        case 1://(a+b)(c-d)
+            d=d*(-1);
+            foilResult=foilEval(a, b, c, d);
+            cout<<"(x+"<<b<<")(x"<<d<<") :"<<endl;
+            break;
+        case 2://(a-b)(c-d)
+            b=b*(-1);
+            d=d*(-1);
+            foilResult=foilEval(a, b, c, d);
+            cout<<"(x"<<b<<")(x"<<d<<") :"<<endl;
+            break;
+            
+    }
+    
+}
+vector<int> foilEval(int a, int b, int c, int d)
+{
+    vector<int> foilResult={};
+    
+    foilResult.push_back((a*c));
+    foilResult.push_back(((a*d)+(b*c)));
+    foilResult.push_back((b*d));
+
+    return foilResult;
 }
 
 int randomInt(int start, int end)
