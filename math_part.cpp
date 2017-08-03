@@ -2,7 +2,7 @@
 //  main.cpp
 //  math_asvab
 //
-//  Created by Daniel Aleman on 7/18/17.
+
 //  Copyright © 2017 Josue Aleman. All rights reserved.
 //
 
@@ -52,17 +52,18 @@ int main()
     
    // cout << string(50, '\n');
         cout<<endl<<endl;
+        
+    dividingQuestion();
+    cout<<endl;
+    areaQuestion();
+    cout<<endl;
+    exponentQuestion();
+    cout<<endl;
+    percentageQuestion();
+    cout<<endl;
         rateQuestion();
-        cout<<endl;
-//    dividingQuestion();
-//    cout<<endl;
-//    areaQuestion();
-//    cout<<endl;
-//    exponentQuestion();
-//    cout<<endl;
-//    percentageQuestion();
-//    cout<<endl;
-//    
+cout<<endl;
+    
         cout<<"Continue? (y/n):";
         cin>>response;
         while(!cin || !(response=='y'||response=='Y'||response=='n'||response=='N'))
@@ -416,8 +417,8 @@ void rateQuestion()
     char user_choice;
     char right_answer;
     
-    int selection=3;
-    //int selection=randomInt(0, 4);
+    //int selection=5;
+    int selection=randomInt(0, 6);
     
     switch (selection)
     {
@@ -473,6 +474,31 @@ void rateQuestion()
             checkAnswers(user_choice, right_answer);
             break;
         }
+        case 4:{//A vehicle has ____ mpg, how long can the vehicle go if it has a tank of ___ gallons?
+            rate=double(randomInt(8, 30));
+            denominator=double(randomInt(15, 35));
+            numerator=rate*denominator;
+            answer=numerator;
+            cout<<"A vehicle has "<<rate<<" mpg."<<endl;
+            cout<<"How long can the vehicle go if it has a tank of "<<denominator<<" gallons?"<<endl;
+            cout<<"(round answer to nearest whole mile)"<<endl;
+            right_answer=generateAnswerDouble(answer, false, " miles", true);
+            user_choice=validateQuestion();
+            checkAnswers(user_choice, right_answer);
+            break;
+        }
+        case 5:{//A cehicle has ___ mpg and travels ___ miles. How many gallons did it use?
+            rate=double(randomInt(8, 30));
+            numerator=(randomInt(50, 280));
+            denominator=(1/rate)*numerator;
+            answer=denominator;
+            cout<<"A vehicle has "<<rate<<" mpg and travels "<<numerator<<" miles."<<endl;
+            cout<<"How many gallons did the vehicle use?"<<endl;
+            cout<<"(round to the nearest gallon)"<<endl;
+            right_answer=generateAnswerDouble(answer, false, " gallons", true);
+            user_choice=validateQuestion();
+            checkAnswers(user_choice, right_answer);
+            break;}
     }
     
 }
@@ -549,4 +575,5 @@ int randomInt(int start, int end)
     
     return randnum;
 }
+
 
